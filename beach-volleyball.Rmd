@@ -13,9 +13,25 @@ library(scales)
 library(lubridate)
 theme_set(theme_light())
 
-tuesdata <- tidytuesdayR::tt_load('2020-05-19')
+# Get the Data
 
-vb_matches <- tuesdata$vb_matches %>%
+vb_matches <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-19/vb_matches.csv', guess_max = 76000)
+
+# Or read in with tidytuesdayR package (https://github.com/thebioengineer/tidytuesdayR)
+
+# Either ISO-8601 date or year/week works!
+
+# Install via devtools::install_github("thebioengineer/tidytuesdayR")
+
+#tuesdata <- tidytuesdayR::tt_load('2020-05-19')
+#tuesdata <- tidytuesdayR::tt_load(2020, week = 21)
+
+
+#vb_matches <- tuesdata$vb_matches
+
+#tuesdata <- tidytuesdayR::tt_load('2020-05-19')
+
+vb_matches <- vb_matches %>%
   mutate(match_id = row_number())
 ```
 
@@ -27,7 +43,7 @@ vb_matches %>%
   count(gender, sort = TRUE)
 
 vb_matches %>%
-  count(year) %>%
+  count(year) 
   
 ```
 
@@ -175,8 +191,8 @@ players_before_2019 %>%
 
 
 ```{r}
-player_first_year_summarized %>%
-  filter(!is.nan(avg_attacks))
+#player_first_year_summarized %>%
+ # filter(!is.nan(avg_attacks))
 ```
 
 
